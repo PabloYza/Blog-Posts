@@ -5,7 +5,7 @@ import _ from 'lodash';
 export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts()); // The AWAIT is making sure we do not progress to the next line of code until we have successfully fetched list of post dispatch an action and updated our reducer with all this different fetched post
   
-  const userIds = _.uniq(_.map(getState().posts, 'userId')) // the result of this lodash implementation is an array with just the uniqs 'userId'
+  const userIds = _.uniq(_.map(getState().posts, 'userId')); // the result of this lodash implementation is an array with just the uniqs 'userId'
   userIds.forEach(id => dispatch(fetchUser(id))); // We need to iterate over our list of Ids and for every Id we need to call our fetchUser Action Creator
 };
 
@@ -16,7 +16,7 @@ export const fetchPosts = () => async dispatch => {
 };
 
   
-export const fetchUser = (id) => async dispatch => {
+export const fetchUser = id => async dispatch => {
   const response = await jsonPlaceholder.get(`/users/${id}`);
       
   dispatch({ type: 'FETCH_USER', payload: response.data });
